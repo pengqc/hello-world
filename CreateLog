@@ -1,0 +1,28 @@
+#/bin/bash
+
+conststringone=".976Z,1.1.1.1,ATDCLIENT,2.2.2.2,ATDSERVER,08D52ABB7D37A22A;2018-03-06T08:03:57.861Z;0,DC1HUBCAS01\Default DC1HUBCAS01,SMTP,RECEIVE,21359501,<1dd5115e-145f-1a47-17f0-b2fb9f75f3b4@baishancloud.com>,lee@baishancloud.com;jia@baishancloud.com,,2550,2,,,Event 6002 Windshear warning - Class 3 - A/C: B-2502 - Baishan: CES5891 - 06/03/2018 01:07:56,atd"
+conststringtwo="@baishancloud.com,atd4@baishancloud.com,07I: NTS: ,Originating,,172.1.1.1,172.2.2.2,S:FirstForestHop=ATDSERVER@baishancloud.com"
+
+outFile=$1
+
+if[ -z "$outFile" ]
+then
+   echo "need to input one arguments"
+   exit 1
+fi
+
+    
+for((i=0;i<200000;i++))
+do
+      NowTime=$(date "+%Y-%m-%dT%H:%M:%S")
+      #echo "$NowTime"
+      randnum=$(($RANDOM%51))
+      log=${NowTime}${conststringone}${randnum}${conststringtwo}
+      echo "$log" >> $outfile
+      #randnum=$(($RANDOM%10))
+      #time=$(echo "scale=1;$randnum/10"|bc)
+      #echo "$time"
+      #sleep $time
+done
+
+exit 0
